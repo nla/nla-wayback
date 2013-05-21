@@ -23,19 +23,20 @@ String sourceUrl = cResult.getOriginalUrl();
 String targetUrl = cResult.getRedirectUrl();
 String captureTS = cResult.getCaptureTimestamp();
 Date captureDate = cResult.getCaptureDate();
+
 if(targetUrl.equals("-")) {
-	Map<String,String> headers = results.getResource().getHttpHeaders();
-	Iterator<String> headerNameItr = headers.keySet().iterator();
-	while(headerNameItr.hasNext()) {
-	       String name = headerNameItr.next();
-	       if(name.toUpperCase().equals("LOCATION")) {
-	    	    targetUrl = headers.get(name);
-	            // by the spec, these should be absolute already, but just in case:
-	            targetUrl = UrlOperations.resolveUrl(sourceUrl, targetUrl);
-	    	    
-	    	    
-	       }
-	}
+    Map<String,String> headers = results.getResource().getHttpHeaders();
+    Iterator<String> headerNameItr = headers.keySet().iterator();
+    while(headerNameItr.hasNext()) {
+           String name = headerNameItr.next();
+           if(name.toUpperCase().equals("LOCATION")) {
+                targetUrl = headers.get(name);
+                // by the spec, these should be absolute already, but just in case:
+                targetUrl = UrlOperations.resolveUrl(sourceUrl, targetUrl);
+                
+                
+           }
+    }
 }
 // TODO: Handle replay if we still don't have a redirect..
 ArchivalUrl aUrl = new ArchivalUrl(wbr);
@@ -53,30 +54,41 @@ String prettyDate = fmt.format("MetaReplay.captureDateDisplay",captureDate);
 int secs = 5;
 
 %>
-    <jsp:include page="/WEB-INF/template/UI-header.jsp" flush="true" />
+<jsp:include page="/WEB-INF/template/UI-header.jsp" flush="true" />
+<body>
 
-        <div id="positionHome">
-            <section>
-            <div id="logoHome">
-                <a href="/index.jsp"><h1><span>Internet Archive's Wayback Machine</span></h1></a>
-            </div>
-            </section>
-            <section>
-            <div id="error">
-	<script type="text/javascript">
-	function go() {
-		document.location.href = "<%= safeTargetReplayUrlJS %>";
-	}
-	window.setTimeout("go()",<%= secs * 1000 %>);
-	</script>
-		<p class="code">Loading...</p>
-		<p class="code shift target"><%= safeSource %> | <%= prettyDate %></p>
-		<p class="code shift red">Got an HTTP 302 response at crawl time</p>
-		<p class="code">Redirecting to...</p>
-		<p class="code shift target"><%= safeTarget %></p>
-        <p class="impatient"><a href="<%= safeTargetReplayUrl %>">Impatient?</a></p>
-            </div>
-            </section>
-            <div id="errorBorder"></div>
+<div class="message info">
+<h2>HTTP 302 Redirect at crawl time</h1>
+<p><span class="url"><%= safeSource %></span> (captured <span class="datetime"><%= prettyDate %></span>)</p> 
+<p>redirects to</p>
+<p><span class="url"><%= safeTarget %></span></p>
+<hr/>
+<p>Redirecting in <span id="countdown"><%= secs %> seconds</span>
+<p class="impatient"><a href="<%= safeTargetReplayUrl %>" target="replayFrame">Impatient?</a></p>
+</div>
 
-        <jsp:include page="/WEB-INF/template/UI-footer.jsp" flush="true" />
+<script type="text/javascript">
+function go() {
+	document.location.href = "<%= safeTargetReplayUrlJS %>";
+}
+
+function countdown(element, seconds) {
+    interval = setInterval(function() {
+        var el = document.getElementById(element);
+        seconds--;
+        if(seconds == 0) {
+            clearInterval(interval);
+            go();
+        }
+
+        var secondText = seconds == 1 ? 'second' : 'seconds';
+        el.innerHTML = seconds + ' ' + secondText;
+    }, 1000);
+}
+
+$(document).ready(function() {
+    countdown('countdown', <%= secs %>);
+});
+</script>
+<jsp:include page="/WEB-INF/template/UI-footer.jsp" flush="true" />
+

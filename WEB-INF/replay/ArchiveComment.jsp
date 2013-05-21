@@ -12,10 +12,10 @@ String prettyArchiveString = fmt.format(prettyDateFormat,exactDate);
 String prettyRequestString = fmt.format(prettyDateFormat,now);
 %>
 <!--
-     FILE ARCHIVED ON <%= prettyArchiveString %> AND RETRIEVED FROM THE
-     INTERNET ARCHIVE ON <%= prettyRequestString %>.
-     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
-
-     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
-     SECTION 108(a)(3)).
+     file archived on <%= prettyArchiveString %> and retrieved from the
+     National Library of Australia's web archive on <%= prettyRequestString %>. 
+     Javascript appended by wayback machine, copyright internet archive.
+     
+     All other content may also be protected by copyright (17 U.S.C.
+     Section 108(A)(3)).
 -->

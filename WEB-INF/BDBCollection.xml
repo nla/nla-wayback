@@ -40,13 +40,13 @@
     <property name="sourceList">
       <list>
         <bean class="org.archive.wayback.resourcestore.resourcefile.DirectoryResourceFileSource">
-          <property name="name" value="files1" />
-          <property name="prefix" value="${wayback.basedir}/files1/" />
+          <property name="name" value="govau2011" />
+          <property name="prefix" value="/derivative/data/nla.arc/gov.au/001/000" />
           <property name="recurse" value="false" />
         </bean>
         <bean class="org.archive.wayback.resourcestore.resourcefile.DirectoryResourceFileSource">
-          <property name="name" value="files2" />
-          <property name="prefix" value="${wayback.basedir}/files2/" />
+          <property name="name" value="govau2012" />
+          <property name="prefix" value="/derivative/data/nla.arc/gov.au/002/000" />
           <property name="recurse" value="false" />
         </bean>
       </list>

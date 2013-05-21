@@ -15,7 +15,7 @@
     <property name="properties">
       <value>
         wayback.basedir=/tmp/wayback
-        wayback.urlprefix=http://localhost.archive.org:8080/wayback/
+        wayback.urlprefix=http://htx-mpearson:8080/wb/wayback/
       </value>
     </property>
   </bean>
@@ -26,13 +26,13 @@
 <!--
 	The ResourceFileLocationDB implementation to use for mapping ARC/WARC names
 	to absolute paths/URLs via a BDBJE database.
--->
+
   <bean id="resourcefilelocationdb" class="org.archive.wayback.resourcestore.locationdb.BDBResourceFileLocationDB">
     <property name="bdbPath" value="${wayback.basedir}/file-db/db/" />
     <property name="bdbName" value="DB1" />
     <property name="logPath" value="${wayback.basedir}/file-db/db.log" />
   </bean>
-<!--
+
 	The following bean provides an alternate flat-file based LocationDB
 	implementation.
 -->
@@ -41,6 +41,12 @@
     <property name="path" value="${wayback.basedir}/path-index.txt" />
   </bean>
 -->
+
+  <bean id="resourcefilelocationdb" class="org.archive.wayback.resourcestore.locationdb.FlatFileResourceFileLocationDB">
+    <property name="path" value="/data/gov2011-12/path-index.txt" />
+  </bean>
+
+
 <!--
     To enable manual management of, or remote access to the above locationDB,
     uncomment the following bean.
@@ -69,9 +75,14 @@
 	ARC/WARC files are located, see the file BDBCollection.xml.
 -->
 
-  <import resource="BDBCollection.xml"/>
-<!--
+
+<!--  
+<import resource="BDBCollection.xml"/>
+-->
+
   <import resource="CDXCollection.xml"/>
+
+<!--
   <import resource="RemoteCollection.xml"/>
   <import resource="NutchCollection.xml"/>
 -->
@@ -172,19 +183,25 @@
 	<!--
     <property name="exactHostMatch" value="true" />
 	-->
-    
+<!--    
     <property name="collection" ref="localbdbcollection" />
-<!--
-    <property name="collection" ref="localcdxcollection" />
 -->
+    <property name="collection" ref="localcdxcollection" />
+
 
     <property name="replay" ref="archivalurlreplay" />
     <property name="query">
       <bean class="org.archive.wayback.query.Renderer">
-        <property name="captureJsp" value="/WEB-INF/query/CalendarResults.jsp" />
 <!--
-        This .jsp provides a "search engine" style listing of results vertically
+        <property name="captureJsp" value="/WEB-INF/query/CalendarResults.jsp" />
+-->        
         <property name="captureJsp" value="/WEB-INF/query/HTMLCaptureResults.jsp" />
+<!--
+        <property name="captureJsp" value="/WEB-INF/query/BubbleCalendar.jsp" />
+
+	<property name="urlJsp" value="/WEB-INF/query/XMLUrlResults.jsp" />
+
+	<property name="captureJsp" value="/WEB-INF/query/XMLCaptureResults.jsp" />
 -->
       </bean>
     </property>
@@ -198,10 +215,8 @@
     <property name="parser">
       <bean class="org.archive.wayback.archivalurl.ArchivalUrlRequestParser">
         <property name="maxRecords" value="10000" />
-        <!--
-        <property name="earliestTimestamp" value="1999" />
-        <property name="latestTimestamp" value="2004" />
-        -->
+        <property name="earliestTimestamp" value="20110101000000" />
+        <property name="latestTimestamp" value="20131231235959" />   
       </bean>
     </property>
 
