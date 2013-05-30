@@ -6,18 +6,58 @@
  * the application can display a suitable archival URL for the user to bookmark.
  */
 
+ if (typeof console === 'undefined') {
+    console = { 
+        log: function(){}, 
+        debug: function() {}, 
+        info: function() {}, 
+        warn: function() {}, 
+        error: function() {}
+    };
+}
+
 /*
  * Create a namespace to make it VERY unlikely that any of our Javascript code will collide
  * with any Javascript code from the archived page being replayed
  */
 _NationalLibraryOfAustralia_WebArchive = {
-    /*
-     * TODO: This value should be set in a configuration file, not here
-     */
-    agwaBaseUrl: 'http://htx-mpearson:8091',
-    nlaWebArcReplayUrlTemplate: function() { return this.agwaBaseUrl + '/replay/wrapWaybackUrl?wbUrl={{URL}}' },
-    nlaUrlPrefixQueryUrl: function(prefixUrl) { return this.agwabaseUrl + '/search?mode=urlSearch&urlQueryType=prefix&source=url&url=' + parentUrl },
+    agwaBaseUrlErrMsg: 'AGWA base URL has not been set so Wayback cannot communicate with AGWA',
+    
+    makeAgwaReplayUrl: function(waybackReplayUrl) {
+    },
+    
+    genAgwaReplayUrl: function(waybackReplayUrl) {
+        var encodedUrl = encodeURIComponent(waybackReplayUrl);
+        return this.agwaReplayUrl(encodedUrl);
+    },
+    
+    agwaReplayUrl: function(url) {
+        if (!this.agwaBaseUrl) {
+            alert(this.agwaBaseUrlErrMsg);
+            throw this.agwaBaseUrlErrMsg;
+        } else {
+            return this.agwaBaseUrl + '/replay/wrapWaybackUrl?wbUrl=' + url;
+        }
+    },
+    
+    makeAgwaPrefixQueryUrl: function(prefixUrl) { 
+        if (!this.agwaBaseUrl) {
+            alert(this.agwaBaseUrlErrMsg);
+            throw this.agwaBaseUrlErrMsg;
+        } else {
+            // return this.agwabaseUrl + '/search?mode=urlSearch&urlQueryType=prefix&source=url&url=' + parentUrl
+            return this.agwaPrefixQueryUrl.replace('{{URL}}', prefixUrl);
+        }
+    },
 
+    setBaseUrl: function(url) {
+        this.agwaBaseUrl = url;
+    },
+    
+    setPrefixQueryUrl: function(url) {
+        this.agwaPrefixQueryUrl = url;
+    },
+    
     /*!
      * contentloaded.js
      *
@@ -110,16 +150,10 @@ _NationalLibraryOfAustralia_WebArchive = {
         return (window.self == window.top);
     },
     
-    genNLAWebArchiveUrl: function(waybackReplayUrl) {
-        var encodedUrl = encodeURIComponent(waybackReplayUrl);
-        var nlaWebArcReplayUrl = this.nlaWebArcReplayUrlTemplate().replace('{{URL}}', encodedUrl);
-        return nlaWebArcReplayUrl;
-    },
-    
     displayInNLAWebArchiveGUI: function() {
-        window.location.replace(this.genNLAWebArchiveUrl(window.location.href));
-        //app = _NationalLibraryOfAustralia_WebArchive;
-        //app.postMessage({type: 'replay-url-opened-new-window', data: {url: document.location.href, title: title}});
+        var app = _NationalLibraryOfAustralia_WebArchive;
+        window.location.replace(app.makeAgwaReplayUrl(window.location.href));
+        app.postMessage({type: 'replay-url-opened-new-window', data: {url: document.location.href, title: title}});
     },
     
     setUp: function() {
@@ -127,12 +161,13 @@ _NationalLibraryOfAustralia_WebArchive = {
         
         app.contentLoaded(window, function() {
             console.log("Wayback replay - url = " + document.location.href);
+            
             /* If the document is being displayed in the browser
              * window instead of the #replayFrame iframe element as it should
              * be, redirect the browser to a URL which will redisplay the 
              * document in the correct context (in the #replayFrame iframe
              * wrapped with the rest of the NLA Web Archive GUI).
-             */
+             */             
             if (app.windowIsBrowserWindow()) {
                 app.displayInNLAWebArchiveGUI();
                 return;
