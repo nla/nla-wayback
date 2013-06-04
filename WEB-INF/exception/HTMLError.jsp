@@ -16,8 +16,28 @@
 %><%@ page import="org.archive.wayback.util.partition.Partition"
 %><%@ page import="org.archive.wayback.util.partition.PartitionSize"
 %><%@ page import="org.archive.wayback.partition.PartitionPartitionMap"
-%><%@page import="org.archive.wayback.exception.SpecificCaptureReplayException"
-%><%
+%><%@ page import="org.archive.wayback.exception.SpecificCaptureReplayException"
+%>
+<!-- The next two imports are required for loading the file agwa.properties -->
+  <%@ page import="org.springframework.util.PropertyPlaceholderHelper"
+%><%@ page import="java.util.Properties"
+%>
+<%
+// Load the config file 'agwa.properties' to figure out where AGWA lives in 
+// order to integrate with it
+
+PropertyPlaceholderHelper placeholderHelper;
+Properties agwaProperties;
+
+if (session.getAttribute("agwaPropertiesLoaded") == null) {
+    placeholderHelper = new PropertyPlaceholderHelper("${", "}");
+    agwaProperties = new Properties();
+    agwaProperties.load(application.getResourceAsStream("/WEB-INF/agwa.properties"));
+    session.setAttribute("agwaBaseUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url.base"), agwaProperties));
+    session.setAttribute("agwaPrefixQueryUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url.search.prefix"), agwaProperties));
+    session.setAttribute("agwaPropertiesLoaded", true);
+}
+
 UIResults results = UIResults.extractException(request);
 WaybackException e = results.getException();
 WaybackRequest wbr = results.getWbRequest();
@@ -57,7 +77,7 @@ if(e instanceof ResourceNotInArchiveException) {
 	String parentUrl = UrlOperations.getUrlParentDir(requestUrl);
 	if(parentUrl != null) {
 		String escapedParentUrl = fmt.escapeHtml(parentUrl); 		
-		String prefixQueryUrl = "http://htx-mpearson:8091/search?mode=urlSearch&urlQueryType=prefix&source=url&url=" + parentUrl;
+		String prefixQueryUrl = ((String)session.getAttribute("agwaPrefixQueryUrl")).replace("{{URL}}", escapedParentUrl);
 		String escapedPrefixQueryUrl = fmt.escapeHtml(prefixQueryUrl);
 		%>
 		        </p>
@@ -103,9 +123,11 @@ if(e instanceof ResourceNotInArchiveException) {
             </div>
 <script type="text/javascript">
 ;(function(){
-    var app = _NationalLibraryOfAustralia_WebArchive;
-    if (app.windowParentIsBrowserWindow()) {
-        app.resourceNotFound();
+    var agwa = _NationalLibraryOfAustralia_WebArchive;
+    agwa.setBaseUrl('<%= session.getAttribute("agwaBaseUrl") %>');
+    agwa.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');    
+    if (agwa.windowParentIsBrowserWindow()) {
+        agwa.resourceNotFound();
     } else {
         var msgBox = document.getElementsByClassName('message error')[0];
         msgBox.style.position = 'relative';

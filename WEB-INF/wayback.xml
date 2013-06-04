@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd"
        default-init-method="init">
-
 <!--
     Macro-like substitutions for the overall file:
       wayback.basedir: default top level directory for all index, state, 
 		                 locationdb storage.
 -->
 
-  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <!-- <import resource="AGWAConfig.xml"/> -->
+
+  <bean id="waybackProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="properties">
       <value>
         wayback.basedir=/tmp/wayback
-        wayback.urlprefix=http://htx-mpearson:8080/wb/wayback/
+        wayback.urlprefix=http://htx-mpearson:8080/agwa-wayback/wayback/
       </value>
     </property>
   </bean>
