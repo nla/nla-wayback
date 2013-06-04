@@ -7,5 +7,6 @@ fi
 sed -i "s@^agwa.host: .*@agwa.host: $AGWA_HOST@" WEB-INF/agwa.properties
 sed -i "s@^agwa.port: .*@agwa.port: $AGWA_PORT@" WEB-INF/agwa.properties
 sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=http://$(hostname -f):$PORT/wayback@" WEB-INF/wayback.xml
+sed -i "s@8080@$PORT@g" WEB-INF/wayback.xml
 mkdir $1/ROOT
 cp -a ./ $1/ROOT/
