@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ -z "$AGWA_HOST" ]; then
-  echo "The AGWA_HOST and AGWA_PORT environments need to be set in your jettyctl config file."
+if [ -z "$AGWA_URL" ]; then
+  echo "The AGWA_URL environment varable needs to be set in your jettyctl config file."
   exit 1
 fi
 
