@@ -24,9 +24,6 @@ _NationalLibraryOfAustralia_WebArchive = {
     agwaBaseUrlErrMsg: 'AGWA base URL has not been set so Wayback cannot communicate with AGWA',
     
     makeAgwaReplayUrl: function(waybackReplayUrl) {
-    },
-    
-    genAgwaReplayUrl: function(waybackReplayUrl) {
         var encodedUrl = encodeURIComponent(waybackReplayUrl);
         return this.agwaReplayUrl(encodedUrl);
     },
