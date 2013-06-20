@@ -21,7 +21,7 @@
  * with any Javascript code from the archived page being replayed
  */
 _NationalLibraryOfAustralia_WebArchive = {
-    agwaBaseUrlErrMsg: 'AGWA base URL has not been set so Wayback cannot communicate with AGWA',
+    agwaUrlErrMsg: 'The base URL for AGWA has not been set so Wayback cannot communicate with AGWA',
     
     makeAgwaReplayUrl: function(waybackReplayUrl) {
         var encodedUrl = encodeURIComponent(waybackReplayUrl);
@@ -29,26 +29,34 @@ _NationalLibraryOfAustralia_WebArchive = {
     },
     
     agwaReplayUrl: function(url) {
-        if (!this.agwaBaseUrl) {
-            alert(this.agwaBaseUrlErrMsg);
-            throw this.agwaBaseUrlErrMsg;
+        if (!this.agwaUrl) {
+            alert(this.agwaUrlErrMsg);
+            throw this.agwaUrlErrMsg;
         } else {
-            return this.agwaBaseUrl + '/replay/wrapWaybackUrl?wbUrl=' + url;
+            return this.agwaUrl + '/replay/wrapWaybackUrl?wbUrl=' + url;
         }
     },
     
     makeAgwaPrefixQueryUrl: function(prefixUrl) { 
-        if (!this.agwaBaseUrl) {
-            alert(this.agwaBaseUrlErrMsg);
-            throw this.agwaBaseUrlErrMsg;
+        if (!this.agwaUrl) {
+            alert(this.agwaUrlErrMsg);
+            throw this.agwaUrlErrMsg;
         } else {
             // return this.agwabaseUrl + '/search?mode=urlSearch&urlQueryType=prefix&source=url&url=' + parentUrl
             return this.agwaPrefixQueryUrl.replace('{{URL}}', prefixUrl);
         }
     },
 
-    setBaseUrl: function(url) {
-        this.agwaBaseUrl = url;
+    setAgwaUrl: function(agwaUrl) {
+        this.agwaUrl = agwaUrl;
+        
+        var doubleSlashPos = agwaUrl.indexOf('://');
+        var endOfHostPos = agwaUrl.indexOf('/', doubleSlashPos + 3);
+        if (endOfHostPos != -1) {
+            this.agwaOriginUrl = agwaUrl.slice(0, endOfHostPos);
+        } else {
+            this.agwaOriginUrl = agwaUrl;
+        }
     },
     
     setPrefixQueryUrl: function(url) {
@@ -128,7 +136,7 @@ _NationalLibraryOfAustralia_WebArchive = {
      * handled by the NLA Web Archive application.
      */
     postMessage: function(message) {
-        top.postMessage(message, this.agwaBaseUrl);
+        top.postMessage(message, this.agwaOriginUrl);
     },
     
     resourceNotFound: function() {
