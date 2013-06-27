@@ -28,4 +28,4 @@ _NationalLibraryOfAustralia_WebArchive.setAgwaUrl('<%= session.getAttribute("agw
 _NationalLibraryOfAustralia_WebArchive.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');
 _NationalLibraryOfAustralia_WebArchive.postMessage({type: 'state', data: 'resourceFound'});
 </script>
-
+<!-- agwaUrl = <%= session.getAttribute("agwaUrl") %> -->
