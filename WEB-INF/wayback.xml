@@ -19,7 +19,7 @@
     <property name="properties">
       <value>
         wayback.basedir=/tmp/wayback
-        wayback.urlprefix=http://htx-mpearson:8080/agwa-wayback/wayback/
+        wayback.urlprefix=/agwa-wayback/wayback/
       </value>
     </property>
   </bean>
