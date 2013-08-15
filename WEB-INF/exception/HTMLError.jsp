@@ -34,6 +34,7 @@ if (session.getAttribute("agwaPropertiesLoaded") == null) {
     agwaProperties = new Properties();
     agwaProperties.load(application.getResourceAsStream("/WEB-INF/agwa.properties"));
     session.setAttribute("agwaUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url"), agwaProperties));
+    session.setAttribute("waybackUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("wayback.url"), agwaProperties));
     session.setAttribute("agwaPrefixQueryUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url.search.prefix"), agwaProperties));
     session.setAttribute("agwaPropertiesLoaded", true);
 }
@@ -125,6 +126,7 @@ if(e instanceof ResourceNotInArchiveException) {
 ;(function(){
     var agwaWayback = _NationalLibraryOfAustralia_WebArchive;
     agwaWayback.setAgwaUrl('<%= session.getAttribute("agwaUrl") %>');
+    agwaWayback.setWaybackUrl('<%= session.getAttribute("waybackUrl") %>');
     agwaWayback.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');    
     if (agwa.windowParentIsBrowserWindow()) {
         agwa.resourceNotFound();

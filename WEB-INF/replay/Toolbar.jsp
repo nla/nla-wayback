@@ -17,6 +17,7 @@ if (session.getAttribute("agwaPropertiesLoaded") == null) {
     agwaProperties = new Properties();
     agwaProperties.load(application.getResourceAsStream("/WEB-INF/agwa.properties"));
     session.setAttribute("agwaUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url"), agwaProperties));
+    session.setAttribute("waybackUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("wayback.url"), agwaProperties));
     session.setAttribute("agwaPrefixQueryUrl", placeholderHelper.replacePlaceholders(agwaProperties.getProperty("agwa.url.search.prefix"), agwaProperties));
     session.setAttribute("agwaPropertiesLoaded", true);
 }
@@ -24,8 +25,12 @@ if (session.getAttribute("agwaPropertiesLoaded") == null) {
 %>
 <script type="text/javascript" src="<%= staticPrefix %>js/nla-web-archive.js"></script>
 <script type="text/javascript">
-_NationalLibraryOfAustralia_WebArchive.setAgwaUrl('<%= session.getAttribute("agwaUrl") %>');
-_NationalLibraryOfAustralia_WebArchive.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');
-_NationalLibraryOfAustralia_WebArchive.postMessage({type: 'state', data: 'resourceFound'});
+;(function(){
+    var agwaWayback = _NationalLibraryOfAustralia_WebArchive;
+    agwaWayback.setAgwaUrl('<%= session.getAttribute("agwaUrl") %>');
+    agwaWayback.setWaybackUrl('<%= session.getAttribute("waybackUrl") %>');
+    agwaWayback.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');    
+    agwaWayback.postMessage({type: 'state', data: 'resourceFound'});
+})();
 </script>
 <!-- agwaUrl = <%= session.getAttribute("agwaUrl") %> -->

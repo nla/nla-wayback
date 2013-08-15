@@ -23,17 +23,35 @@
 _NationalLibraryOfAustralia_WebArchive = {
     agwaUrlErrMsg: 'The base URL for AGWA has not been set so Wayback cannot communicate with AGWA',
     
-    makeAgwaReplayUrl: function(waybackReplayUrl) {
-        var encodedUrl = encodeURIComponent(waybackReplayUrl);
-        return this.agwaReplayUrl(encodedUrl);
-    },
-    
     agwaReplayUrl: function(url) {
         if (!this.agwaUrl) {
-            alert(this.agwaUrlErrMsg);
             throw this.agwaUrlErrMsg;
         } else {
-            return this.agwaUrl + '/replay/wrapWaybackUrl?wbUrl=' + url;
+            /*
+             * replayUriRef is a URI reference (i.e. partial identifier for archived resource)
+             * See http://en.wikipedia.org/wiki/Uniform_resource_identifier#URI_reference
+             */
+            var replayUriRef = this.getReplayUriRef(url);
+            console.info("replayUri: " + replayUriRef);
+            if (replayUriRef === false) {
+                throw 'Error: replayUriRef is false';
+            } else {
+                return this.agwaUrl + replayUriRef;
+            }
+        }
+    },
+    
+    getReplayUriRef: function(url) {
+        var n = this.waybackUrl.length;
+        
+        if (this.waybackUrl != url.substr(0, n)) {
+            console.error("Supposed Wayback replay URL does not have waybackUrl as prefix");
+            console.error("URL is " + url);
+            console.error("waybackUrl is " + this.waybackUrl);
+            return false;
+        } else {
+            var replayUri = url.substr(n);
+            return replayUri;
         }
     },
     
@@ -57,6 +75,10 @@ _NationalLibraryOfAustralia_WebArchive = {
         } else {
             this.agwaOriginUrl = agwaUrl;
         }
+    },
+    
+    setWaybackUrl: function(waybackUrl) {
+        this.waybackUrl = waybackUrl;
     },
     
     setPrefixQueryUrl: function(url) {
@@ -157,8 +179,17 @@ _NationalLibraryOfAustralia_WebArchive = {
     
     displayInNLAWebArchiveGUI: function() {
         var app = _NationalLibraryOfAustralia_WebArchive;
-        window.location.replace(app.makeAgwaReplayUrl(window.location.href));
-        app.postMessage({type: 'replay-url-opened-new-window', data: {url: document.location.href, title: title}});
+        
+        var redirectUrl = app.agwaReplayUrl(window.location.href);
+        /**
+         * Useful for debugging - uncomment this code and comment the line below
+         * it to interrupt the automatic Javascript-driven redirect to an AGWA
+         * replay URL
+        if (confirm(app.agwaUrl)) {
+            window.location.replace(redirectUrl);
+        } 
+        */
+        window.location.replace(redirectUrl);
     },
     
     setUp: function() {
