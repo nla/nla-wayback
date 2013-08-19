@@ -196,7 +196,7 @@ _NationalLibraryOfAustralia_WebArchive = {
         var app = this;
         
         app.contentLoaded(window, function() {
-            console.log("Wayback replay - url = " + document.location.href);
+            console.log("Wayback replay - url = " + window.location.href);
             
             /* If the document is being displayed in the browser
              * window instead of the #replayFrame iframe element as it should
@@ -215,6 +215,7 @@ _NationalLibraryOfAustralia_WebArchive = {
             // created by the NLA Web Archive application then inform the
             // NLA Web Archive application that a new URL is being rendered.
             if (app.windowParentIsBrowserWindow()) {
+                console.info("Posting message 'replay-url-changed' to AGWA window, new URL=" + window.location.href); 
                 app.postMessage({type: 'replay-url-changed', data: {url: document.location.href, title: title}});
             }
         });    
