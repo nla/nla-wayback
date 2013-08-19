@@ -8,11 +8,10 @@ if [ -z "$WAYBACK_HOST" ]; then
   WAYBACK_HOST="$(hostname -f)"
 fi
 
-if [ -z "$WAYBACK_URL" ]; then
-  WAYBACK_URL=http://${WAYBACK_HOST}:${PORT}${ROOT_URL_PREFIX-}/wayback/
-fi
+# WAYBACK_URL *must* be specified as a relative URI, e.g. '/gov/wayback/'
 
 sed -i "s@^agwa.url: .*@agwa.url: $AGWA_URL@" WEB-INF/agwa.properties
+sed -i "s@^wayback.url: .*@wayback.url: $WAYBACK_URL@" WEB-INF/agwa.properties
 sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL}@" WEB-INF/wayback.xml
 sed -i "s@8080@$PORT@g" WEB-INF/wayback.xml
 sed -i "s@/data/gov2011-12/path-index.txt@$AGWA_PATH_INDEX@g" WEB-INF/wayback.xml WEB-INF/CDXCollection.xml
