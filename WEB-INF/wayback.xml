@@ -19,7 +19,7 @@
     <property name="properties">
       <value>
         wayback.basedir=/tmp/wayback
-        wayback.urlprefix=/agwa-wayback/wayback/
+        wayback.urlprefix=/wayback/
       </value>
     </property>
   </bean>
@@ -47,7 +47,7 @@
 -->
 
   <bean id="resourcefilelocationdb" class="org.archive.wayback.resourcestore.locationdb.FlatFileResourceFileLocationDB">
-    <property name="path" value="/data/gov2011-12/path-index.txt" />
+    <property name="path" value="/data/agwa/indexes/agwa-path-index.txt" />
   </bean>
 
 

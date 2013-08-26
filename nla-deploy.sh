@@ -13,7 +13,8 @@ fi
 sed -i "s@^agwa.url: .*@agwa.url: $AGWA_URL@" WEB-INF/agwa.properties
 sed -i "s@^wayback.url: .*@wayback.url: $WAYBACK_URL@" WEB-INF/agwa.properties
 sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL}@" WEB-INF/wayback.xml
+
 sed -i "s@8080@$PORT@g" WEB-INF/wayback.xml
-sed -i "s@/data/gov2011-12/path-index.txt@$AGWA_PATH_INDEX@g" WEB-INF/wayback.xml WEB-INF/CDXCollection.xml
+sed -i "s@/data/agwa/indexes/agwa-path-index.txt@$AGWA_PATH_INDEX@g" WEB-INF/wayback.xml WEB-INF/CDXCollection.xml
 mkdir $1/ROOT
 cp -a ./ $1/ROOT/
