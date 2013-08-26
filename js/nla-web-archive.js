@@ -58,6 +58,7 @@ _NationalLibraryOfAustralia_WebArchive = {
             console.error("waybackUrl is " + this.waybackUrl);
             return false;
         } else {
+            // replayUri should be in the form /<timestamp>/<archived-url>
             var replayUri = url.substr(n);
             return replayUri;
         }
