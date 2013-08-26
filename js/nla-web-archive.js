@@ -43,6 +43,14 @@ _NationalLibraryOfAustralia_WebArchive = {
     
     getReplayUriRef: function(url) {
         var n = this.waybackUrl.length;
+        var link = document.createElement('a');
+        var serverUrl;
+        link.href='/';
+        serverUrl = (link.href + '').slice(0, -1);
+         
+        if (url.substr(0, serverUrl.length) === serverUrl) {
+            url = url.substr(serverUrl.length);
+        }
         
         if (this.waybackUrl != url.substr(0, n)) {
             console.error("Supposed Wayback replay URL does not have waybackUrl as prefix");
