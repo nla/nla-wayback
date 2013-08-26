@@ -11,8 +11,8 @@ fi
 # WAYBACK_URL *must* be specified as a relative URI, e.g. '/gov/wayback/'
 
 sed -i "s@^agwa.url: .*@agwa.url: $AGWA_URL@" WEB-INF/agwa.properties
-sed -i "s@^wayback.url: .*@wayback.url: $WAYBACK_URL@" WEB-INF/agwa.properties
-sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL%/}@" WEB-INF/wayback.xml
+sed -i "s@^wayback.url: .*@wayback.url: ${WAYBACK_URL%/}" WEB-INF/agwa.properties
+sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL%/}/@" WEB-INF/wayback.xml
 
 sed -i "s@8080@$PORT@g" WEB-INF/wayback.xml
 sed -i "s@/data/agwa/indexes/agwa-path-index.txt@$AGWA_PATH_INDEX@g" WEB-INF/wayback.xml WEB-INF/CDXCollection.xml
