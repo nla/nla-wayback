@@ -180,6 +180,7 @@ _NationalLibraryOfAustralia_WebArchive = {
         console.debug("Accessed window.top");
         var s = window.self;
         console.debug("Accessed window.self");
+        console.debug('Window is ' + ((t !== s) ? '' : 'not ') + ' iframe');
         return (t !== s);
     },
     
@@ -189,6 +190,7 @@ _NationalLibraryOfAustralia_WebArchive = {
         console.debug("Accessed window.top");
         var p = window.parent;        
         console.debug("Accessed window.parent");
+        console.debug('Window parent is ' + ((p === t) ? '' : 'not ') + ' browser window');
         return (p === t);
     },
     
@@ -198,6 +200,7 @@ _NationalLibraryOfAustralia_WebArchive = {
         console.debug("Accessed window.top");
         var s = window.self;
         console.debug("Accessed window.self");
+        console.debug('Window is ' + ((s === t) ? '' : 'not ') + ' browser window');
         return (s === t);
     },
     
