@@ -175,15 +175,30 @@ _NationalLibraryOfAustralia_WebArchive = {
     },
     
     windowIsIframe: function() {
-        return (window.top != window.self);
+        console.debug("In windowIsIframe");
+        var t = window.top;
+        console.debug("Accessed window.top");
+        var s = window.self;
+        console.debug("Accessed window.self");
+        return (t !== s);
     },
     
     windowParentIsBrowserWindow: function() {
-        return (window.parent == window.top);
+        console.debug("In windowParentIsBrowserWindow");
+        var t = window.top;
+        console.debug("Accessed window.top");
+        var p = window.parent;        
+        console.debug("Accessed window.parent");
+        return (p === t);
     },
     
     windowIsBrowserWindow: function() {
-        return (window.self == window.top);
+        console.debug("In windowIsBrowserWindow");
+        var t = window.top;
+        console.debug("Accessed window.top");
+        var s = window.self;
+        console.debug("Accessed window.self");
+        return (s === t);
     },
     
     displayInNLAWebArchiveGUI: function() {
