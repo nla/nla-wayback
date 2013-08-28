@@ -128,8 +128,8 @@ if(e instanceof ResourceNotInArchiveException) {
     agwaWayback.setAgwaUrl('<%= session.getAttribute("agwaUrl") %>');
     agwaWayback.setWaybackUrl('<%= session.getAttribute("waybackUrl") %>');
     agwaWayback.setPrefixQueryUrl('<%= session.getAttribute("agwaPrefixQueryUrl") %>');    
-    if (agwa.windowParentIsBrowserWindow()) {
-        agwa.resourceNotFound();
+    if (agwaWayback.windowParentIsBrowserWindow()) {
+        agwaWayback.resourceNotFound();
     } else {
         var msgBox = document.getElementsByClassName('message error')[0];
         msgBox.style.position = 'relative';
