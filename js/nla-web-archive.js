@@ -175,29 +175,32 @@ _NationalLibraryOfAustralia_WebArchive = {
     },
     
     windowIsIframe: function() {
-        console.debug("In windowIsIframe");
+        //console.debug("In windowIsIframe");
         var t = window.top;
-        console.debug("Accessed window.top");
+        //console.debug("Accessed window.top");
         var s = window.self;
-        console.debug("Accessed window.self");
+        //console.debug("Accessed window.self");
+        console.debug('Wayback: Window is ' + ((t !== s) ? '' : 'not ') + ' iframe');
         return (t !== s);
     },
     
     windowParentIsBrowserWindow: function() {
-        console.debug("In windowParentIsBrowserWindow");
+        //console.debug("In windowParentIsBrowserWindow");
         var t = window.top;
-        console.debug("Accessed window.top");
+        //console.debug("Accessed window.top");
         var p = window.parent;        
-        console.debug("Accessed window.parent");
+        //console.debug("Accessed window.parent");
+        console.debug('Wayback: Window parent is ' + ((p === t) ? '' : 'not ') + 'browser window');
         return (p === t);
     },
     
     windowIsBrowserWindow: function() {
-        console.debug("In windowIsBrowserWindow");
+        //console.debug("In windowIsBrowserWindow");
         var t = window.top;
-        console.debug("Accessed window.top");
+        //console.debug("Accessed window.top");
         var s = window.self;
-        console.debug("Accessed window.self");
+        //console.debug("Accessed window.self");
+        console.debug('Wayback: Window is ' + ((s === t) ? '' : 'not ') + 'browser window');
         return (s === t);
     },
     
