@@ -61,7 +61,7 @@
               <list>
                 <value>/derivative/data/nla.arc/gov.au/001/sorted.cdx</value>
                 <value>/derivative/data/nla.arc/gov.au/002/nla2012-gov.cdx</value>
-                <value>/derivative/data/nla.arc/gov.au/003/nla2013-gov.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/003/nla2013-gov-fixed.cdx</value>
               </list>
             </property>
           </bean>
