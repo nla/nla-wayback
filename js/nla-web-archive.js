@@ -175,31 +175,22 @@ _NationalLibraryOfAustralia_WebArchive = {
     },
     
     windowIsIframe: function() {
-        //console.debug("In windowIsIframe");
         var t = window.top;
-        //console.debug("Accessed window.top");
         var s = window.self;
-        //console.debug("Accessed window.self");
         console.debug('Wayback: Window is ' + ((t !== s) ? '' : 'not ') + ' iframe');
         return (t !== s);
     },
     
     windowParentIsBrowserWindow: function() {
-        //console.debug("In windowParentIsBrowserWindow");
         var t = window.top;
-        //console.debug("Accessed window.top");
         var p = window.parent;        
-        //console.debug("Accessed window.parent");
         console.debug('Wayback: Window parent is ' + ((p === t) ? '' : 'not ') + 'browser window');
         return (p === t);
     },
     
     windowIsBrowserWindow: function() {
-        //console.debug("In windowIsBrowserWindow");
         var t = window.top;
-        //console.debug("Accessed window.top");
         var s = window.self;
-        //console.debug("Accessed window.self");
         console.debug('Wayback: Window is ' + ((s === t) ? '' : 'not ') + 'browser window');
         return (s === t);
     },
@@ -209,13 +200,15 @@ _NationalLibraryOfAustralia_WebArchive = {
         
         var redirectUrl = app.agwaReplayUrl(window.location.href);
         /**
-         * Useful for debugging - uncomment this code and comment the line below
-         * it to interrupt the automatic Javascript-driven redirect to an AGWA
+         * Useful for debugging - uncomment the if statement below
+         * to interrupt the automatic Javascript-driven redirect to an AGWA
          * replay URL
-        if (confirm(app.agwaUrl)) {
+         */
+        //if (confirm(app.agwaUrl)) {
             window.location.replace(redirectUrl);
-        } 
-        */
+        //} 
+        
+        console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
         window.location.replace(redirectUrl);
     },
     
@@ -223,8 +216,9 @@ _NationalLibraryOfAustralia_WebArchive = {
         var app = this;
         
         app.contentLoaded(window, function() {
-            console.log("Wayback replay - url = " + window.location.href);
+            console.log("Wayback: Replay content loaded, url: " + window.location.href);
             
+            console.debug("Wayback: Window is " + app.windowIsIframe() ? '' : 'not ' + 'an iframe');
             /* If the document is being displayed in the browser
              * window instead of the #replayFrame iframe element as it should
              * be, redirect the browser to a URL which will redisplay the 
@@ -242,8 +236,15 @@ _NationalLibraryOfAustralia_WebArchive = {
             // created by the NLA Web Archive application then inform the
             // NLA Web Archive application that a new URL is being rendered.
             if (app.windowParentIsBrowserWindow()) {
-                console.info("Posting message 'replay-url-changed' to AGWA window, new URL=" + window.location.href); 
-                app.postMessage({type: 'replay-url-changed', data: {url: document.location.href, title: title}});
+                console.info("Wayback: Posting message 'replay-url-changed' to AGWA window, new URL=" + window.location.href); 
+                /**
+                 * Useful for debugging - uncomment the if statement below
+                 * to intercept the 'replay-url-changed' message being posted to
+                 * the parent window (AGWA).
+                 */
+                //if (confirm("Do you want to post a 'replay-url-changed' message to AGWA?")) {
+                    app.postMessage({type: 'replay-url-changed', data: {url: document.location.href, title: title}});
+                //}
             }
         });    
     }
