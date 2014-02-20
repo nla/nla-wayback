@@ -4,10 +4,6 @@ if [ -z "$AGWA_URL" ]; then
   exit 1
 fi
 
-if [ -z "$WAYBACK_HOST" ]; then
-  WAYBACK_HOST="$(hostname -f)"
-fi
-
 # WAYBACK_URL *must* be specified as a relative URI, e.g. '/gov/wayback/'
 
 sed -i "s@^agwa.url: .*@agwa.url: $AGWA_URL@" WEB-INF/agwa.properties
