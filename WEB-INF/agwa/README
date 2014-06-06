@@ -1,9 +1,0 @@
-invalidUrl.war contains a single servlet InvalidUrlHandler which at the moment simply returns a response with the message 'Resource not in archive' and a 404 HTTP status.
-
-This WAR file should be dropped in the folder containing the ROOT deployment of agwa-wayback. This will deploy the app to the /invalidUrl/ context.
-
-The inclusion and configuration of UrlRewriteFilter in the Wayback web.xml file maps it to process *all* requests (i.e. a url-pattern of '/*'). The configuration of UrlRewriteFilter in urlrewrite.xml causes any URLs not fitting the pattern of what is expected by Wayback are rewritten to 
-
-'/invalidUrl/...original URI path.../'
-
-This causes them to be processed by the InvalidUrlHandler servlet.
