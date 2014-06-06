@@ -40,7 +40,7 @@
 -->
 
   <bean id="resourcefilelocationdb" class="org.archive.wayback.resourcestore.locationdb.FlatFileResourceFileLocationDB">
-    <property name="path" value="${wayback.basedir}/path-index.txt" />
+    <property name="path" value="/data/agwa/indexes/agwa-path-index.txt" />
   </bean>
 
 <!--
