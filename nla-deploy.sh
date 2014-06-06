@@ -12,5 +12,5 @@ sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL%/}/@" src/main/we
 
 sed -i "s@8080@$PORT@g" src/main/webapp/WEB-INF/wayback.xml
 sed -i "s@/data/agwa/indexes/agwa-path-index.txt@$AGWA_PATH_INDEX@g" src/main/webapp/WEB-INF/wayback.xml src/main/webapp/WEB-INF/CDXCollection.xml
-mkdir $1/ROOT
-cp -a ./ $1/ROOT/
+mvn package
+unzip -d $1/ROOT target/*.war
