@@ -2,7 +2,7 @@ NLA OpenWayback Overlays
 ========================
 
 These overlays provide configuration and styling for our various instances of
-the Wayback web archive replay tool.
+the [Wayback](https://github.com/iipc/openwayback) web archive replay tool.
 
 * agwa - [Australian Government Web Archive](http://webarchive.nla.gov.au/gov/) (.gov.au crawls)
 * wdh - [Whole Domain Harvest](http://dl.nla.gov.au/wdh/) (.au crawls)
