@@ -27,13 +27,13 @@
     get them back on track.
   -->
   <bean name="+" class="org.archive.wayback.webapp.ServerRelativeArchivalRedirect">
-    <property name="matchPort" value="8871" />
+    <property name="matchPort" value="8080" />
     <property name="useCollection" value="true" />
   </bean>
 
   <bean name="standardaccesspoint" class="org.archive.wayback.webapp.AccessPoint">
     <property name="accessPointPath" value="${wayback.urlprefix}"/>
-    <property name="internalPort" value="8871"/>
+    <property name="internalPort" value="8080"/>
     <property name="serveStatic" value="true" />
     <property name="bounceToReplayPrefix" value="false" />
     <property name="bounceToQueryPrefix" value="false" />
