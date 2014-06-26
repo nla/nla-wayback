@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
+       default-init-method="init">
+
+  <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="properties">
+      <value>
+          wayback.basedir=/derivative/data/nla.arc/nph-arch
+          wayback.urlprefix=http://pandora.nla.gov.au/nph-wb/
+      </value>
+    </property>
+  </bean>
+
+  <bean id="waybackCanonicalizer" class="org.archive.wayback.util.url.KeyMakerUrlCanonicalizer">
+    <constructor-arg name="surtForm" value="true"/>
+  </bean>
+
+  <import resource="CDXCollection.xml"/>
+  <import resource="ArchivalUrlReplay.xml"/>
+  
+  <!--
+    Last ditch attempt to resolve server-relative URLs (/page1.htm) that were 
+    not successfully rewritten, resolving them against the referring URL to
+    get them back on track.
+  -->
+  <bean name="+" class="org.archive.wayback.webapp.ServerRelativeArchivalRedirect">
+    <property name="matchPort" value="8871" />
+    <property name="useCollection" value="true" />
+  </bean>
+
+  <bean name="standardaccesspoint" class="org.archive.wayback.webapp.AccessPoint">
+    <property name="accessPointPath" value="http://mapoon.nla.gov.au:8871/wayback/"/>
+    <property name="internalPort" value="8871"/>
+    <property name="serveStatic" value="true" />
+    <property name="bounceToReplayPrefix" value="false" />
+    <property name="bounceToQueryPrefix" value="false" />
+    <property name="replayPrefix" value="${wayback.urlprefix}" />
+    <property name="queryPrefix" value="${wayback.urlprefix}" />
+    <property name="staticPrefix" value="${wayback.urlprefix}" />
+    <property name="collection" ref="localcdxcollection" />
+    <property name="replay" ref="archivalurlreplay" />
+    <property name="query">
+      <bean class="org.archive.wayback.query.Renderer">
+        <property name="captureJsp" value="/WEB-INF/query/CalendarResults.jsp" />
+      </bean>
+    </property>
+
+    <property name="uriConverter">
+      <bean class="org.archive.wayback.archivalurl.ArchivalUrlResultURIConverter">
+        <property name="replayURIPrefix" value="${wayback.urlprefix}"/>
+      </bean>
+    </property>
+
+    <property name="parser">
+      <bean class="org.archive.wayback.archivalurl.ArchivalUrlRequestParser">
+        <property name="maxRecords" value="10000" />
+      </bean>
+    </property>
+  </bean>
+
+</beans>
