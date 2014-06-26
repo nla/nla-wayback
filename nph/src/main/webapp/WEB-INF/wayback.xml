@@ -32,7 +32,7 @@
   </bean>
 
   <bean name="standardaccesspoint" class="org.archive.wayback.webapp.AccessPoint">
-    <property name="accessPointPath" value="http://localhost:8871/wayback/"/>
+    <property name="accessPointPath" value="${wayback.urlprefix}"/>
     <property name="internalPort" value="8871"/>
     <property name="serveStatic" value="true" />
     <property name="bounceToReplayPrefix" value="false" />
