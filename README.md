@@ -1,14 +1,13 @@
-govau-wayback
-=============
+NLA OpenWayback Overlays
+========================
 
-Lightly modified [OpenWayback](https://github.com/iipc/openwayback) overlay for use with Australian Government
-Web Archive (AGWA) web application. 
+These overlays provide configuration and styling for our various instances of
+the Wayback web archive replay tool.
 
-Changes
--------
+* agwa - [Australian Government Web Archive](http://webarchive.nla.gov.au/gov/) (.gov.au crawls)
+* wdh - [Whole Domain Harvest](http://dl.nla.gov.au/wdh/) (.au crawls)
 
-* Injected JavaScript which uses PostMessage to pass page details to AGWA
-* Removed toolbar (AGWA has it's own in outer frame')
-* NLA branded ArchiveComment.jsp
-* Simplified styling on error pages
+Deploying
+---------
 
+Specify `NLA_ENVIRON=agwa` or `NLA_ENVIRON=wdh` in the jettyctl config.
