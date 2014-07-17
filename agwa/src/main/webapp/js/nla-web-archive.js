@@ -211,6 +211,17 @@ _NationalLibraryOfAustralia_WebArchive = {
         console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
         window.location.replace(redirectUrl);
     },
+
+    applyWorkarounds: function() {
+        /* If an "overflow: hidden" style is on the body tag, remove it.
+         * This is a workaround for replaying ag.gov.au where the scrollbars
+         * disappear when the website is inside our iframe.
+         */
+        var bodyTags = document.getElementsByTagName("body");
+        if (bodyTags.length > 0 && window.getComputedStyle && window.getComputedStyle(bodyTags[0]).overflow == 'hidden') {
+            bodyTags[0].style.overflow = 'visible';
+        }
+    },
     
     setUp: function() {
         var app = this;
@@ -246,6 +257,7 @@ _NationalLibraryOfAustralia_WebArchive = {
                     app.postMessage({type: 'replay-url-changed', data: {url: document.location.href, title: title}});
                 //}
             }
+            app.applyWorkarounds();
         });    
     }
 }
