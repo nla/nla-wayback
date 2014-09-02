@@ -60,11 +60,12 @@
           <bean class="org.archive.wayback.resourceindex.CompositeSearchResultSource">
             <property name="CDXSources">
               <list>
-                <value>/derivative/data/nla.arc/gov.au/001/sorted.cdx</value>
-                <value>/derivative/data/nla.arc/gov.au/002/nla2012-gov.cdx</value>
-                <value>/derivative/data/nla.arc/gov.au/003/nla2013-gov-fixed.cdx</value>
-                <value>/derivative/data/nla.arc/gov.au/004/all.cdx</value>
-                <value>/derivative/data/nla.arc/gov.au/005/all.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/001/surt.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/002/surt.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/003/surt.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/004/surt.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/005/surt.cdx</value>
+                <value>/derivative/data/nla.arc/gov.au/006/surt.cdx</value>
               </list>
             </property>
           </bean>      

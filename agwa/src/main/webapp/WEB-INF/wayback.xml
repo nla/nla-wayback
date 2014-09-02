@@ -20,8 +20,9 @@
     </property>
   </bean>
 
-  <bean id="waybackCanonicalizer" class="org.archive.wayback.util.url.AggressiveUrlCanonicalizer" />
-
+  <bean id="waybackCanonicalizer" class="org.archive.wayback.util.url.KeyMakerUrlCanonicalizer">
+    <constructor-arg name="surtForm" value="true"/>
+  </bean>
 
 <!--
 	The ResourceFileLocationDB implementation to use for mapping ARC/WARC names
