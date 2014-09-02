@@ -39,6 +39,9 @@ if(e instanceof ResourceNotInArchiveException) {
 	} else if (requestUrl.endsWith("/") && wbr.getReplayTimestamp().length() > 0) {
 		// let's try to redirect to /index.html
 		notArchivedRedirectUrl = replayPrefix + wbr.getReplayTimestamp() + "/" + requestUrl + "index.html";
+	} else if (requestUrl.endsWith("/index.htm") && wbr.getReplayTimestamp().length() > 0) {
+		// let's try to redirect to /index.html
+		notArchivedRedirectUrl = replayPrefix + wbr.getReplayTimestamp() + "/" + requestUrl + "l";
 	} else {
 		// give up :)
 		// strip the server context (e.g. /nph-wb/)
