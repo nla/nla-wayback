@@ -27,8 +27,8 @@
 		<property name="enabled" column="enabled" type="java.lang.Boolean" />
     <property name="exactMatch" column="exactMatch" type="java.lang.Boolean" />
     
-    <property name="lastModified" type="java.util.Date" generated="always">
-      <column name="lastModified" not-null="true" />
+    <property name="lastModified" type="java.util.Date" >
+      <column name="lastModified" />
     </property>
     
  	</class>
