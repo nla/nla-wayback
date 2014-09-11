@@ -7,9 +7,7 @@
 				<param name="sequence">rule_id_seq</param>
 			</generator>
 
-        </id>
-
-        <timestamp name="lastModified" access="field" column="lastModified" />
+		</id>
 
 		<property name="policy" column="policy" type="java.lang.String" />
 		<property name="surt" column="surt" type="text" />
@@ -28,6 +26,10 @@
 		<property name="publicComment" column="public_comment" type="text" />
 		<property name="enabled" column="enabled" type="java.lang.Boolean" />
     <property name="exactMatch" column="exactMatch" type="java.lang.Boolean" />
+    
+    <property name="lastModified" type="java.util.Date" generated="always">
+      <column name="lastModified" not-null="true" />
+    </property>
     
  	</class>
 </hibernate-mapping>
