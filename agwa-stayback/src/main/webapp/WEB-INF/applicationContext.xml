@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+                                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:property-placeholder />
+
+	<bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+		<property name="jdbcUrl" value="${DB_URL}"/>
+		<property name="user" value="${DB_USER}"/>
+		<property name="password" value="${DB_PASSWORD}"/>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>Rule.hbm.xml</value>
+				<value>RuleChange.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLInnoDBDialect
+				hibernate.hbm2ddl.auto=create
+			</value>
+		</property>
+	</bean>
+
+
+	<bean id="ruleDao"
+		class="org.archive.accesscontrol.model.HibernateRuleDao">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<bean id="autoFormatView"
+		class="org.archive.accesscontrol.oracle.AutoFormatView">
+		<property name="defaultFormat">
+			<value>xml</value>
+		</property>
+		<property name="views">
+			<map>
+				<entry>
+					<key>
+						<value>xml</value>
+					</key>
+					<bean
+						class="org.archive.accesscontrol.oracle.XStreamView">
+						<constructor-arg>
+							<value>xml</value>
+						</constructor-arg>
+					</bean>
+				</entry>
+				<entry>
+					<key>
+						<value>json</value>
+					</key>
+					<bean
+						class="org.archive.accesscontrol.oracle.XStreamView">
+						<constructor-arg>
+							<value>json</value>
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+</beans>
