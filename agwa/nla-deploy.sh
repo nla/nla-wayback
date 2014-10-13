@@ -4,10 +4,14 @@ if [ -z "$AGWA_URL" ]; then
   exit 1
 fi
 
-# WAYBACK_URL *must* be specified as a relative URI, e.g. '/gov/wayback/'
+if [[ $WAYBACK_URL =~ ^http://[^/]+(/.*)$ ]]; then
+  WAYBACK_PATH="${BASH_REMATCH[1]}"
+else
+  WAYBACK_PATH="$WAYBACK_URL"
+fi
 
 sed -i "s@^agwa.url: .*@agwa.url: $AGWA_URL@" src/main/webapp/WEB-INF/agwa.properties
-sed -i "s@^wayback.url: .*@wayback.url: ${WAYBACK_URL%/}@" src/main/webapp/WEB-INF/agwa.properties
+sed -i "s@^wayback.url: .*@wayback.url: ${WAYBACK_PATH%/}@" src/main/webapp/WEB-INF/agwa.properties
 sed -i "s@wayback.urlprefix=.*@wayback.urlprefix=${WAYBACK_URL%/}/@" src/main/webapp/WEB-INF/wayback.xml
 
 sed -i "s@8080@$PORT@g" src/main/webapp/WEB-INF/wayback.xml
