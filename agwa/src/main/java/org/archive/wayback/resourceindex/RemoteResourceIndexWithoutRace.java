@@ -72,7 +72,7 @@ import org.xml.sax.SAXException;
  * @author brad
  * @version $Date$, $Revision$
  */
-public class RemoteResourceIndex implements ResourceIndex {
+public class RemoteResourceIndexWithoutRace implements ResourceIndex {
 	private static final Logger LOGGER = Logger.getLogger(RemoteResourceIndex
 			.class.getName());
 
