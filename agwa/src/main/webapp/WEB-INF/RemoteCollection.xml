@@ -37,7 +37,7 @@
     </property>
 
     <property name="resourceIndex">
-      <bean class="org.archive.wayback.resourceindex.RemoteResourceIndex">
+      <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
         <property name="searchUrlBase" value="http://chester.nla.gov.au:9901/agwa" />
       </bean>
     </property>
