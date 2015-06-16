@@ -42,8 +42,19 @@
       <bean class="org.archive.wayback.resourceindex.LocalResourceIndex">
         <property name="canonicalizer" ref="waybackCanonicalizer" />
         <property name="source">
+          <!--   
           <bean class="org.archive.wayback.resourceindex.cdx.CDXIndex">
             <property name="path" value="/derivative/data/nla.arc/au/au.surt.cdx" />
+          </bean>
+          -->
+          <bean class="org.archive.wayback.resourceindex.CompositeSearchResultSource">
+            <property name="CDXSources">
+              <list>
+                <value>/derivative/data/nla.arc/au/au.surt.cdx</value>
+                <value>/derivative/data/nla.arc/au/009/surt.cdx</value>
+                <value>/derivative/data/nla.arc/au/010/surt.cdx</value>
+              </list>
+            </property>
           </bean>
         </property>
         <property name="maxRecords" value="10000" />
