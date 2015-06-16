@@ -204,7 +204,7 @@
     <property name="parser">
       <bean class="org.archive.wayback.archivalurl.ArchivalUrlRequestParser">
         <property name="maxRecords" value="10000" />
-        <property name="earliestTimestamp" value="2005" />
+        <property name="earliestTimestamp" value="1996" />
         <!--
         <property name="latestTimestamp" value="2004" />
         -->
