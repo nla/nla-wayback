@@ -32,7 +32,7 @@
 
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-        <property name="prefix" value="http://heritrix-devel.nla.gov.au/bamboo/warcs/" />
+        <property name="prefix" value="http://heritrix.nla.gov.au/bamboo/warcs/" />
       </bean>
     </property>
 
