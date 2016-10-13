@@ -23,6 +23,7 @@ String sourceUrl = cResult.getOriginalUrl();
 String targetUrl = cResult.getRedirectUrl();
 String captureTS = cResult.getCaptureTimestamp();
 Date captureDate = cResult.getCaptureDate();
+String httpCode = cResult.getHttpCode();
 
 if(targetUrl.equals("-")) {
     Map<String,String> headers = results.getResource().getHttpHeaders();
@@ -58,13 +59,16 @@ int secs = 5;
 <body>
 
 <div class="message info">
-<h2>HTTP 302 Redirect at crawl time</h1>
-<p><span class="url"><%= safeSource %></span> (captured <span class="datetime"><%= prettyDate %></span>)</p> 
-<p>redirects to</p>
+<h2>Just a moment, we are taking you to the webpage</h2>
+<p>At <span class="datetime"><%= prettyDate %></span></p>
+<p><span class="url"><%= safeSource %></span></p> 
+<p>redirected to</p>
 <p><span class="url"><%= safeTarget %></span></p>
 <hr/>
-<p>Redirecting in <span id="countdown"><%= secs %> seconds</span>
-<p class="impatient"><a href="<%= safeTargetReplayUrl %>" target="replayFrame">Impatient?</a></p>
+<p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <span class="url"><%= safeTarget %></span></p>
+<p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
+<p>HTTP <% httpCode %> Redirect</p>
+<p><a href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
 </div>
 
 <script type="text/javascript">
