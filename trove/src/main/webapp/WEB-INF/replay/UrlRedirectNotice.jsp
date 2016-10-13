@@ -94,6 +94,6 @@ function countdown(element, seconds) {
 </script>
 <jsp:include page="/WEB-INF/template/UI-footer.jsp" flush="true" />
 
-<!-- script>
+<script>
 countdown('countdown', <%= secs %>);
-</script-->
+</script>
