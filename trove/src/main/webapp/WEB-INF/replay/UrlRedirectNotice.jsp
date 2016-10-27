@@ -52,7 +52,7 @@ String safeTargetReplayUrl = fmt.escapeHtml(targetReplayUrl);
 String safeTargetReplayUrlJS = fmt.escapeJavaScript(targetReplayUrl);
 String safeHttpCode = fmt.escapeHtml(httpCode);
 
-String prettyDate = fmt.format("MetaReplay.captureDateDisplay",captureDate);
+String prettyDate = fmt.format("{0,date,d MMM yyyy, H:mma}", captureDate);
 int secs = 5;
 
 %>
@@ -61,14 +61,13 @@ int secs = 5;
 
 <div class="message info">
 <h2>Just a moment, we are taking you to the webpage</h2>
-<p>At <span class="datetime"><%= prettyDate %></span></p>
+<p><strong>At <span class="datetime"><%= prettyDate %></span></strong></p>
 <p><span class="url"><%= safeSource %></span></p> 
-<p>redirected to</p>
+<p><strong>redirected to</strong></p>
 <p><span class="url"><%= safeTarget %></span></p>
-<hr/>
 <p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <span class="url"><%= safeTarget %></span></p>
 <p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
-<p>HTTP <%= safeHttpCode %> Redirect</p>
+<hr/>
 <p><a href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
 </div>
 
