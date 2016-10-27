@@ -67,6 +67,7 @@ int secs = 5;
 <p><span class="url"><%= safeTarget %></span></p>
 <p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <span class="url"><%= safeTarget %></span></p>
 <p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
+<br/>
 <hr/>
 <p><a href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
 </div>
