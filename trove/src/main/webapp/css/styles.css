@@ -443,11 +443,6 @@ table.display tr.odd.row_selected td {
 
 /* Styles added by Mark Pearson (NLA) for Government Web Archive */
 
-.message.info {
-    background-color: #FFFFCC;
-    border: 1px solid #DDDDBB;
-}
-
 .message.error {
     background-color: #FFDDDD;
     border: 1px solid #DDBBBB;
@@ -461,10 +456,6 @@ div.message {
   position: absolute;
   top: 5em;
   width: 600px;
-}
-
-.message.info h2 {
-  background-color: #FFFF99;
 }
 
 .message.error h2 {
