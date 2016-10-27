@@ -65,6 +65,7 @@ int secs = 5;
 <p><%= safeSource %></p> 
 <p><strong>redirected to</strong></p>
 <p><%= safeTarget %></p>
+<br/>
 <p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <%= safeTarget %></p>
 <p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
 <br/>
