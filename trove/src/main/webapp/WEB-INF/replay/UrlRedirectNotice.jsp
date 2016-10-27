@@ -61,11 +61,11 @@ int secs = 5;
 
 <div class="message info">
 <h2>Just a moment, we are taking you to the webpage</h2>
-<p><strong>At <span class="datetime"><%= prettyDate %></span></strong></p>
-<p><span class="url"><%= safeSource %></span></p> 
+<p><strong>At <%= prettyDate %></strong></p>
+<p><%= safeSource %></p> 
 <p><strong>redirected to</strong></p>
-<p><span class="url"><%= safeTarget %></span></p>
-<p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <span class="url"><%= safeTarget %></span></p>
+<p><%= safeTarget %></p>
+<p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <%= safeTarget %></p>
 <p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
 <br/>
 <hr/>
