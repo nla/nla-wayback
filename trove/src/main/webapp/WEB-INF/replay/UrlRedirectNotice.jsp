@@ -52,7 +52,7 @@ String safeTargetReplayUrl = fmt.escapeHtml(targetReplayUrl);
 String safeTargetReplayUrlJS = fmt.escapeJavaScript(targetReplayUrl);
 String safeHttpCode = fmt.escapeHtml(httpCode);
 
-String prettyDate = fmt.format("{0,date,d MMM yyyy, H:mma}", captureDate);
+String prettyDate = fmt.format("{0,date,d MMM yyyy, H:mma}", captureDate).replace("AM", "am").replace("PM","pm");
 int secs = 5;
 
 %>
