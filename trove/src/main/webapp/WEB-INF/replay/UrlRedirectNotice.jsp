@@ -70,7 +70,7 @@ int secs = 5;
 <p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
 <br/>
 <hr/>
-<p><a href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
+<p><a target="_blank" href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
 </div>
 
 <script type="text/javascript">
