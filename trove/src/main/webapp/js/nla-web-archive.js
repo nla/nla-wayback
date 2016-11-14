@@ -16,13 +16,29 @@
     };
 }
 
+if (!console.log) {
+	console.log = function() {};
+}
+if (!console.debug) {
+	console.debug = function() {};
+}
+if (!console.info) {
+	console.info = function() {};
+}
+if (!console.warn) {
+	console.warn = function() {};
+}
+if (!console.error) {
+	console.error = function() {};
+}
+
 /*
  * Create a namespace to make it VERY unlikely that any of our Javascript code will collide
  * with any Javascript code from the archived page being replayed
  */
 _NationalLibraryOfAustralia_WebArchive = {
     agwaUrlErrMsg: 'The base URL for AGWA has not been set so Wayback cannot communicate with AGWA',
-    
+
     agwaReplayUrl: function(url) {
         if (!this.agwaUrl) {
             throw this.agwaUrlErrMsg;
