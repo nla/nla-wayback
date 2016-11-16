@@ -84,7 +84,7 @@ function countdown(element, seconds) {
         seconds--;
         if(seconds == 0) {
             clearInterval(interval);
-            go();
+            //go();
         }
 
         var secondText = seconds == 1 ? 'second' : 'seconds';
