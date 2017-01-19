@@ -21,7 +21,7 @@ response.setHeader("X-MadeUp-Header", "Yes");
 <link rel="stylesheet" type="text/css" 
     href="<%= staticPrefix %>css/styles.css"
     src="<%= staticPrefix %>css/styles.css" />
-<script type="text/javascript" src="<%= staticPrefix %>/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<%= staticPrefix %>js/jquery-1.4.2.min.js"></script>
 <title><%= fmt.format("UIGlobal.pageTitle") %></title>
 <base target="_top" />
 </head>
