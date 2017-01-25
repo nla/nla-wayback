@@ -80,7 +80,7 @@ function go() {
 
 function countdown(element, seconds) {
     if (window.location.hash === "#noRedirect") {
-    	go();
+    	document.location.href = "<%= safeTargetReplayUrlJS %>" +  "#noRedirect";
     }
     interval = setInterval(function() {
         var el = document.getElementById(element);
