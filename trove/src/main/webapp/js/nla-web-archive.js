@@ -221,11 +221,13 @@ _NationalLibraryOfAustralia_WebArchive = {
          * replay URL
          */
         //if (confirm(app.agwaUrl)) {
-            window.location.replace(redirectUrl);
+            //window.location.replace(redirectUrl);
         //} 
         
-        console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
-        window.location.replace(redirectUrl);
+        if (window.location.hash !== "#noRedirect") {
+        	console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
+        	window.location.replace(redirectUrl);
+        }
     },
 
     applyWorkarounds: function() {
