@@ -79,6 +79,9 @@ function go() {
 }
 
 function countdown(element, seconds) {
+    if (window.location.hash === "#noRedirect") {
+    	go();
+    }
     interval = setInterval(function() {
         var el = document.getElementById(element);
         seconds--;
