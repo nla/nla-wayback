@@ -38,7 +38,7 @@
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://hoist.nla.gov.au:9901/trove" />
+        <property name="searchUrlBase" value="http://hoist.nla.gov.au:9901/trove/ap/public" />
       </bean>
     </property>
   </bean>
