@@ -183,7 +183,7 @@ _NationalLibraryOfAustralia_WebArchive = {
      * handled by the NLA Web Archive application.
      */
     postMessage: function(message) {
-        top.postMessage(message, this.agwaOriginUrl);
+        // top.postMessage(message, this.agwaOriginUrl);
     },
     
     resourceNotFound: function() {
