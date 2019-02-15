@@ -32,13 +32,13 @@
 
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-        <property name="prefix" value="http://heritrix.nla.gov.au/bamboo/warcs/" />
+	      <property name="prefix" value="http://dl-uat.nla.gov.au/bamboo/warcs/" />
       </bean>
     </property>
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://hammer.nla.gov.au:9901/agwa" />
+        <property name="searchUrlBase" value="http://hoist.nla.gov.au:9901/trove/ap/public" />
       </bean>
     </property>
   </bean>

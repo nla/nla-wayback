@@ -52,7 +52,7 @@ String safeTargetReplayUrl = fmt.escapeHtml(targetReplayUrl);
 String safeTargetReplayUrlJS = fmt.escapeJavaScript(targetReplayUrl);
 String safeHttpCode = fmt.escapeHtml(httpCode);
 
-String prettyDate = fmt.format("MetaReplay.captureDateDisplay",captureDate);
+String prettyDate = fmt.format("{0,date,d MMM yyyy, H:mma}", captureDate).replace("AM", "am").replace("PM","pm");
 int secs = 5;
 
 %>
@@ -61,25 +61,29 @@ int secs = 5;
 
 <div class="message info">
 <h2>Just a moment, we are taking you to the webpage</h2>
-<p>At <span class="datetime"><%= prettyDate %></span></p>
-<p><span class="url"><%= safeSource %></span></p> 
-<p>redirected to</p>
-<p><span class="url"><%= safeTarget %></span></p>
+<p><strong>At <%= prettyDate %></strong></p>
+<p><%= safeSource %></p> 
+<p><strong>redirected to</strong></p>
+<p><%= safeTarget %></p>
+<br/>
+<p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <%= safeTarget %></p>
+<p class="impatient">or <a id="redirectLink" href="<%= safeTargetReplayUrl %>" target="_self">Go there now</a></p>
+<br/>
 <hr/>
-<p>In <span id="countdown"><%= secs %> seconds</span> we will redirect you to a snapshot of <span class="url"><%= safeTarget %></span></p>
-<p class="impatient">or <a href="<%= safeTargetReplayUrl %>" target="replayFrame">Go there now</a></p>
-<p>HTTP <%= safeHttpCode %> Redirect</p>
-<p><a href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
+<p><a target="_blank" href="http://help.nla.gov.au/node/1282">Why am I seeing this?</a></p>
 </div>
 
 <script type="text/javascript">
 function go() {
-	document.location.href = "<%= safeTargetReplayUrlJS %>";
+	document.getElementById("redirectLink").click();
 }
 
 function countdown(element, seconds) {
+    if (window.parent.location.hash === "#noRedirect") {
+    	window.location.href = "<%= safeTargetReplayUrl %>" + "#noRedirect";
+    }
     interval = setInterval(function() {
-        var el = document.getElementById(element);
+    	var el = document.getElementById(element);
         seconds--;
         if(seconds == 0) {
             clearInterval(interval);

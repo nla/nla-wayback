@@ -16,13 +16,29 @@
     };
 }
 
+if (!console.log) {
+	console.log = function() {};
+}
+if (!console.debug) {
+	console.debug = function() {};
+}
+if (!console.info) {
+	console.info = function() {};
+}
+if (!console.warn) {
+	console.warn = function() {};
+}
+if (!console.error) {
+	console.error = function() {};
+}
+
 /*
  * Create a namespace to make it VERY unlikely that any of our Javascript code will collide
  * with any Javascript code from the archived page being replayed
  */
 _NationalLibraryOfAustralia_WebArchive = {
     agwaUrlErrMsg: 'The base URL for AGWA has not been set so Wayback cannot communicate with AGWA',
-    
+
     agwaReplayUrl: function(url) {
         if (!this.agwaUrl) {
             throw this.agwaUrlErrMsg;
@@ -167,7 +183,7 @@ _NationalLibraryOfAustralia_WebArchive = {
      * handled by the NLA Web Archive application.
      */
     postMessage: function(message) {
-        top.postMessage(message, this.agwaOriginUrl);
+        // top.postMessage(message, this.agwaOriginUrl);
     },
     
     resourceNotFound: function() {
@@ -205,11 +221,13 @@ _NationalLibraryOfAustralia_WebArchive = {
          * replay URL
          */
         //if (confirm(app.agwaUrl)) {
-            window.location.replace(redirectUrl);
+            //window.location.replace(redirectUrl);
         //} 
         
-        console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
-        window.location.replace(redirectUrl);
+        if (window.location.hash !== "#noRedirect") {
+        	console.debug("Wayback: redirecting to AGWA replay URL: " + redirectUrl);
+        	window.location.replace(redirectUrl);
+        }
     },
 
     applyWorkarounds: function() {
