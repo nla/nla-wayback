@@ -32,7 +32,7 @@
 
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-	      <property name="prefix" value="http://dl-uat.nla.gov.au/bamboo/warcs/" />
+	      <property name="prefix" value="http://winch.nla.gov.au:8991/bamboo/warcs/" />
       </bean>
     </property>
 
