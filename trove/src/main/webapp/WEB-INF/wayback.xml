@@ -15,7 +15,7 @@
     <property name="properties">
       <value>
         wayback.basedir=/tmp/wayback
-        wayback.urlprefix=/wayback/
+        wayback.urlprefix=https://webarchive.nla.gov.au/wayback/
       </value>
     </property>
   </bean>
@@ -49,7 +49,8 @@
     uncomment the following bean.
 -->
 <!--
-  <bean name="8080:locationdb" class="org.archive.wayback.resourcestore.locationdb.ResourceFileLocationDBServlet">
+  <bean name="8080:locationdb" class="org.archive.wayback.resourcestore.locationdb.
+Servlet">
     <property name="locationDB" ref="resourcefilelocationdb" />
   </bean>
 -->
