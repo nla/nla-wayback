@@ -38,7 +38,7 @@
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://hammer.nla.gov.au:9901/agwa" />
+        <property name="searchUrlBase" value="http://winch.nla.gov.au:9901/agwa" />
       </bean>
     </property>
   </bean>
