@@ -244,7 +244,7 @@ Servlet">
     <property name="collection" ref="onsitecollection" />
   </bean>
 
-  <bean name="onsiteaccesspoint" parent="standardaccesspoint">
+  <bean name="staffaccesspoint" parent="standardaccesspoint">
     <property name="accessPointPath" value="http://localhost:8080/staff/"/>
     <property name="collection" ref="staffcollection" />
   </bean>
