@@ -31,7 +31,7 @@
   <bean id="remotecollection" class="org.archive.wayback.webapp.WaybackCollection">
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-	      <property name="prefix" value="http://winch.nla.gov.au:8991/bamboo/warcs/" />
+	      <property name="prefix" value="#{ systemEnvironment['WARC_URL'] ?: 'http://winch.nla.gov.au:8991/bamboo/warcs/' }" />
       </bean>
     </property>
 
@@ -45,7 +45,7 @@
   <bean id="onsitecollection" class="org.archive.wayback.webapp.WaybackCollection">
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-        <property name="prefix" value="http://winch.nla.gov.au:8991/bamboo/warcs/" />
+        <property name="prefix" value="#{ systemEnvironment['WARC_URL'] ?: 'http://winch.nla.gov.au:8991/bamboo/warcs/' }" />
       </bean>
     </property>
 
@@ -59,7 +59,7 @@
   <bean id="staffcollection" class="org.archive.wayback.webapp.WaybackCollection">
     <property name="resourceStore">
       <bean class="org.archive.wayback.resourcestore.SimpleResourceStore">
-        <property name="prefix" value="http://winch.nla.gov.au:8991/bamboo/warcs/" />
+        <property name="prefix" value="#{ systemEnvironment['WARC_URL'] ?: 'http://winch.nla.gov.au:8991/bamboo/warcs/' }" />
       </bean>
     </property>
 
