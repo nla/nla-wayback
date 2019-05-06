@@ -37,7 +37,7 @@
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://winch.nla.gov.au:9901/trove/ap/public" />
+        <property name="searchUrlBase" value="#{ systemEnvironment['CDX_URL'] ?: 'http://winch.nla.gov.au:9901/trove' }/ap/public" />
       </bean>
     </property>
   </bean>
@@ -51,7 +51,7 @@
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://winch.nla.gov.au:9901/trove/ap/onsite" />
+        <property name="searchUrlBase" value="#{ systemEnvironment['CDX_URL'] ?: 'http://winch.nla.gov.au:9901/trove' }/ap/onsite" />
       </bean>
     </property>
   </bean>
@@ -65,7 +65,7 @@
 
     <property name="resourceIndex">
       <bean class="org.archive.wayback.resourceindex.RemoteResourceIndexWithoutRace">
-        <property name="searchUrlBase" value="http://winch.nla.gov.au:9901/trove/ap/staff" />
+        <property name="searchUrlBase" value="#{ systemEnvironment['CDX_URL'] ?: 'http://winch.nla.gov.au:9901/trove' }/ap/staff" />
       </bean>
     </property>
   </bean>
