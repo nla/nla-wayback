@@ -239,6 +239,10 @@ Servlet">
 
   </bean>
 
+  <bean name="publicaccesspoint" parent="standardaccesspoint">
+    <property name="accessPointPath" value="http://localhost:8080/public/"/>
+  </bean>
+
   <bean name="onsiteaccesspoint" parent="standardaccesspoint">
     <property name="accessPointPath" value="http://localhost:8080/onsite/"/>
     <property name="collection" ref="onsitecollection" />
