@@ -210,33 +210,6 @@ Servlet">
       </bean>
     </property>
 
-<!-- See the LiveWeb.xml import above.
-    <property name="exclusionFactory" ref="excluder-factory-static" />
-    -->
-    <property name="authentication">
-      <bean class="org.archive.wayback.authenticationcontrol.AccessControlSettingOperation">
-        <property name="operator">
-          <bean class="org.archive.wayback.util.operator.NotBooleanOperator">
-            <property name="operand">
-              <bean class="org.archive.wayback.authenticationcontrol.IPMatchesBooleanOperator">
-                <property name="allowedRanges">
-                  <list>
-                    <!-- <value>192.168.1.16/24</value> -->
-                  </list>
-                </property>
-              </bean>
-            </property>
-          </bean>
-        </property>
-        <property name="factory">
-          <bean class="org.archive.wayback.accesscontrol.oracleclient.OracleExclusionFilterFactory">
-            <property name="oracleUrl" value="${STAYBACK_URL}" />
-            <property name="accessGroup" value="public" />
-          </bean>
-        </property>
-      </bean>
-    </property>
-
   </bean>
 
   <bean name="publicaccesspoint" parent="standardaccesspoint">
