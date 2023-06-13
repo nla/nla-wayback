@@ -1,6 +1,8 @@
 NLA OpenWayback Overlays
 ========================
 
+**Status:** No longer in use.
+
 These overlays provide configuration and styling for our various instances of
 the [Wayback](https://github.com/iipc/openwayback) web archive replay tool.
 
